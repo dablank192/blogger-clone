@@ -1,0 +1,6 @@
+@blogger_clone_HostAddress = http://localhost:5002
+
+GET {{blogger_clone_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
