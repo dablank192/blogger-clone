@@ -5,7 +5,7 @@ namespace blogger_clone.Model;
 public class Blog
 {
     public Guid Id {get; set;} = Guid.NewGuid();
-    public int UserId {get; set;}
+    public Guid UserId {get; set;}
     public string SubDomain {get; set;} = default!;
 
     public List<Post> Post {get; set;}

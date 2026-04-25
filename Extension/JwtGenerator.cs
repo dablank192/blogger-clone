@@ -1,54 +1,19 @@
 using System;
-using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using blogger_clone.Model;
 using Microsoft.IdentityModel.Tokens;
 
-
 namespace blogger_clone.Extension;
 
-public class Utils : IUtils
+public class JwtGenerator
 {
     private readonly IConfiguration _config;
 
-    public Utils (IConfiguration config)
+    public JwtGenerator(IConfiguration config)
     {
         _config = config;
-    }
-    public string GenerateRandomUsername()
-    {
-        var randNum = Random.Shared.Next(0, 1000000);
-
-        var randId = randNum.ToString("D8");
-
-        var userId = $"user_{randId}";
-
-        return userId;
-    }
-
-    public string PasswordHasher(string password)
-    {
-        PasswordHasher<object> hasher = new();
-
-        var hashedPassword = hasher.HashPassword(new object(), password);
-
-        return hashedPassword;
-    }
-
-    public bool VerifyPassword(string plainPassword, string hashedPassword)
-    {
-        PasswordHasher<object> hasher = new();
-
-        var verifyPassword = hasher.VerifyHashedPassword(new object(), hashedPassword, plainPassword);
-
-        if (verifyPassword == PasswordVerificationResult.Failed)
-        {
-            return false;
-        }
-
-        return true;
     }
 
     public string GenerateJwtToken(User user)

@@ -1,6 +1,25 @@
 @blogger_clone_HostAddress = http://localhost:5002
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiJiMWNiNzZiNS1lZjg2LTQ4MTMtOGU1Mi1lMDIzNDgyZjQzNDAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzc3MTMwNTQ3LCJpc3MiOiJibG9nZ2luZy1hcHAiLCJhdWQiOiJVc2VyIn0.3MfaBabJurpnmnPF3MpTOK1--RYgH3bI8HdYThPV-R4
 
 GET {{blogger_clone_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### User Register
+
+POST {{blogger_clone_HostAddress}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "email": "string3@example.com",
+    "password": "string123"
+}
+
+### User Login
+
+POST {{blogger_clone_HostAddress}}/api/v1/auth/login
+Content-Type:  application/json
+
+{
+    "usernameoremail": "string3@example.com",
+    "password": "string123"
+}

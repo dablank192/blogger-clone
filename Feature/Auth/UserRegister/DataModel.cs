@@ -1,11 +1,24 @@
 using System;
 using FluentValidation;
+using MediatR;
 
 namespace blogger_clone.Feature.Auth.UserRegister;
 
-public class Validation : AbstractValidator<RequestModel>
+
+public record Command (
+    string Email,
+    string Password
+) : IRequest<Result>;
+
+public record Result (
+    Guid Id,
+    string Message
+);
+
+
+public class Validator : AbstractValidator<Command>
 {
-    public Validation()
+    public Validator()
     {
         RuleFor(t => t.Email)
         .EmailAddress().WithMessage("Invalid Email format")
@@ -16,3 +29,4 @@ public class Validation : AbstractValidator<RequestModel>
         .MinimumLength(8).WithMessage("Password must be more than 8 character");
     }
 }
+
