@@ -33,6 +33,8 @@
     <Folder Include="Feature\Auth\" />
     <Folder Include="Feature\Auth\UserLogin\" />
     <Folder Include="Feature\Auth\UserRegister\" />
+    <Folder Include="Feature\Blog\" />
+    <Folder Include="Feature\Blog\CreateBlog\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />
   </ItemGroup>
