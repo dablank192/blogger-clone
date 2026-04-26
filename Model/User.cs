@@ -11,5 +11,5 @@ public class User
     public string Password {get; set;} = default!;
     public UserRolesDto Role {get; set;} = UserRolesDto.User;
 
-    public List<Blog> Blog {get; set;}
+    public ICollection<Blog> Blog {get; set;} = new List<Blog>();
 }

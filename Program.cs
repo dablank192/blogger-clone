@@ -33,6 +33,8 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseNpgsql(connectionString);
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<IUtils, Utils>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

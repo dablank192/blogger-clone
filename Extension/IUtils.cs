@@ -10,4 +10,6 @@ public interface IUtils
     public string PasswordHasher (string password);
     public bool VerifyPassword (string plainPassword, string hashedPassword);
     public string GenerateJwtToken(User user);
+    public string ToSubdomain(string username);
+    public Guid GetUserId ();
 }

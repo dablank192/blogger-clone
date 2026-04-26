@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using blogger_clone.Exception;
 using blogger_clone.Exception.Auth;
 using FluentValidation;
+using blogger_clone.Model;
+using blogger_clone.Exception.Blog;
 
 
 namespace blogger_clone.Infrastructure;
@@ -51,6 +53,22 @@ public class GlobalExceptionHandler : IExceptionHandler
             problemDetail.Title = "Incorrect username or password";
             problemDetail.Detail = exception.Message;
             problemDetail.Status = StatusCodes.Status401Unauthorized;
+        }
+
+        else if (exception is BlogExistedException)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            problemDetail.Title = "User already have a blog";
+            problemDetail.Detail = exception.Message;
+            problemDetail.Status = StatusCodes.Status400BadRequest;
+        }
+
+        else if (exception is BlogNotExistedException)
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            problemDetail.Title = "Blog not existed";
+            problemDetail.Detail = exception.Message;
+            problemDetail.Status = StatusCodes.Status404NotFound;
         }
 
         await context.Response.WriteAsJsonAsync(problemDetail, ct);

@@ -28,13 +28,13 @@
     <Folder Include="Dto\" />
     <Folder Include="Exception\" />
     <Folder Include="Exception\Auth\" />
+    <Folder Include="Exception\Blog\" />
     <Folder Include="Extension\" />
-    <Folder Include="Feature\" />
     <Folder Include="Feature\Auth\" />
     <Folder Include="Feature\Auth\UserLogin\" />
     <Folder Include="Feature\Auth\UserRegister\" />
-    <Folder Include="Feature\Blog\" />
-    <Folder Include="Feature\Blog\CreateBlog\" />
+    <Folder Include="Feature\Blog\Admin\" />
+    <Folder Include="Feature\Blog\Admin\DeleteBlogAdmin\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />
   </ItemGroup>

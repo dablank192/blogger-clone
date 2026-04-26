@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using blogger_clone.Model;
 using Microsoft.IdentityModel.Tokens;
+using System.Text.RegularExpressions;
 
 
 namespace blogger_clone.Extension;
@@ -12,10 +13,12 @@ namespace blogger_clone.Extension;
 public class Utils : IUtils
 {
     private readonly IConfiguration _config;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public Utils (IConfiguration config)
+    public Utils (IConfiguration config, IHttpContextAccessor contextAccessor)
     {
         _config = config;
+        _contextAccessor = contextAccessor;
     }
     public string GenerateRandomUsername()
     {
@@ -74,5 +77,38 @@ public class Utils : IUtils
         );
 
         return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+    }
+
+    public string ToSubdomain(string username)
+    {
+        if(string.IsNullOrWhiteSpace(username)) return string.Empty;
+
+        var normalized = username.ToLowerInvariant().Normalize(NormalizationForm.FormD);
+
+        var subdomain = new StringBuilder();
+
+        foreach (var character in normalized)
+        {
+            if(System.Globalization.CharUnicodeInfo.GetUnicodeCategory(character) != System.Globalization.UnicodeCategory.NonSpacingMark)
+            {
+                subdomain.Append(character);
+            }
+        }
+        normalized = subdomain.ToString().Normalize(NormalizationForm.FormC).Replace("đ", "d");
+
+        return Regex.Replace(normalized, @"[^a-z0-9]", "");
+    }
+
+    public Guid GetUserId ()
+    {
+        var user = _contextAccessor.HttpContext!.User;
+
+        var userIdString = user.FindFirstValue("UserId");
+
+        if(string.IsNullOrEmpty(userIdString)) return Guid.Empty;
+
+        var userId = Guid.Parse(userIdString!);
+
+        return userId;
     }
 }

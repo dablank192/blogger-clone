@@ -1,5 +1,5 @@
 @blogger_clone_HostAddress = http://localhost:5002
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiJiMWNiNzZiNS1lZjg2LTQ4MTMtOGU1Mi1lMDIzNDgyZjQzNDAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzc3MTMwNTQ3LCJpc3MiOiJibG9nZ2luZy1hcHAiLCJhdWQiOiJVc2VyIn0.3MfaBabJurpnmnPF3MpTOK1--RYgH3bI8HdYThPV-R4
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI3MDc0M2I3MC01MjhhLTQxNjgtYWVhZC0zZDc5OTExZDU3YTQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzc3MjMyMjU2LCJpc3MiOiJibG9nZ2luZy1hcHAiLCJhdWQiOiJVc2VyIn0.8HcVv44p7ix0rzueBA5DD5QzjXiM4n31BT-FAeP0cwA
 
 GET {{blogger_clone_HostAddress}}/weatherforecast/
 Accept: application/json
@@ -10,7 +10,7 @@ POST {{blogger_clone_HostAddress}}/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "email": "string3@example.com",
+    "email": "string5@example.com",
     "password": "string123"
 }
 
@@ -20,6 +20,21 @@ POST {{blogger_clone_HostAddress}}/api/v1/auth/login
 Content-Type:  application/json
 
 {
-    "usernameoremail": "string3@example.com",
+    "usernameoremail": "string5@example.com",
     "password": "string123"
 }
+
+### Create Blog
+
+GET {{blogger_clone_HostAddress}}/api/v1/blog/create-domain
+Authorization: Bearer {{token}}
+
+### Get All Blog (User)
+
+GET {{blogger_clone_HostAddress}}/api/v1/blog/list-all
+Authorization: Bearer {{token}}
+
+### Delete Blog
+
+DELETE {{blogger_clone_HostAddress}}/api/v1/blog
+Authorization: Bearer {{token}}
