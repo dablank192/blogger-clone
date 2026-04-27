@@ -7,3 +7,10 @@ public record BlogDto(
     string SubDomain,
     string Domain
 );
+
+public record BlogDtoAdmin(
+    Guid UserId,
+    Guid BlogId,
+    string SubDomain,
+    string Domain
+);

@@ -71,6 +71,8 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseMiddleware<TenantResolutionMiddleware>();
+
 app.UseExceptionHandler();
 
 app.MapCarter();

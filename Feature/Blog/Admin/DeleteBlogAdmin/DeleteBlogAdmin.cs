@@ -26,19 +26,17 @@ public class DeleteBlogAdmin(
 
     public static void MapEndpoint (RouteGroupBuilder group)
     {
-        group.MapDelete("/api/v1/admin/blog", async(
-            ISender sender,
-            Query req
+        group.MapDelete("/{blogId}", async(
+            Guid blogId,
+            ISender sender
         ) =>
         {
-            await sender.Send(req);
+            await sender.Send(new Query(blogId));
 
             return Results.NoContent();
         })
         .RequireAuthorization(policy => policy.RequireRole("Admin"))
         .WithName("Delete Blog (Admin)")
         .Produces(StatusCodes.Status204NoContent);
-        
-        // ENDPOINT NÀY CHƯA ĐƯỢC TEST
     }
 }
