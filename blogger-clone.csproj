@@ -39,6 +39,7 @@
     <Folder Include="Feature\Blog\Admin\GetBlogAdmin\" />
     <Folder Include="Feature\Post\" />
     <Folder Include="Feature\Post\CreatePost\" />
+    <Folder Include="Feature\Post\DeletePost\" />
     <Folder Include="Feature\Post\GetPost\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />

@@ -12,5 +12,6 @@ public class PostApi : ICarterModule
 
         CreatePost.CreatePost.MapEndPoint(group);
         GetPost.GetPost.MapEndPoint(group);
+        DeletePost.DeletePost.MapEndPoint(group);
     }
 }

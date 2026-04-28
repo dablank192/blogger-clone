@@ -36,7 +36,8 @@ public class GetPost(
         var blogId = httpContextAccessor.HttpContext!.Items["BlogId"] as Guid?;
 
         var post = await dbContext.Post
-        .Where(t => t.BlogId == blogId)
+        .Where(t => t.BlogId == blogId
+        && t.Status == PostStatusDto.Public)
         .Select(t => new PostDto(
             Id: t.Id,
             Title: t.Title,
