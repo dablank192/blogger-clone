@@ -44,7 +44,8 @@ public class CreatePost(
         {
             BlogId = blogId,
             Title= req.Title,
-            Content= req.Content
+            Content= req.Content,
+            CreatedAt= DateTime.UtcNow
         };
 
         dbContext.Post.Add(newPost);

@@ -1,5 +1,6 @@
 using System;
 using blogger_clone.Dto;
+using blogger_clone.Extension;
 using blogger_clone.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,15 +8,16 @@ using Microsoft.EntityFrameworkCore;
 namespace blogger_clone.Feature.Post.GetPost;
 
 
-public record Query() : IRequest<Result>;
-public record Result(
-    IEnumerable<PostDto> Data
+public record QueryOwner() : IRequest<ResultOwner>;
+public record ResultOwner(
+    IEnumerable<PostDtoOwner> Data
 );
 
-public class GetPost(
+public class GetPostOwner(
     AppDbContext dbContext,
+    IUtils util,
     IHttpContextAccessor httpContextAccessor
-) : IRequestHandler<Query, Result>
+) : IRequestHandler<QueryOwner, ResultOwner>
 
 {
     public static void MapEndPoint(RouteGroupBuilder group)
@@ -24,29 +26,33 @@ public class GetPost(
             ISender sender
         ) =>
         {
-            return Results.Ok(await sender.Send(new Query()));
+            return Results.Ok(await sender.Send(new QueryOwner()));
         })
-        .WithName("Get all Post")
-        .Produces<Result>(StatusCodes.Status200OK)
-        .AllowAnonymous();
+        .WithName("Get all Post (Owner)")
+        .Produces<ResultOwner>(StatusCodes.Status200OK)
+        .RequireAuthorization();
     }
 
-    public async Task<Result> Handle (Query req, CancellationToken ct)
+    public async Task<ResultOwner> Handle (QueryOwner req, CancellationToken ct)
     {
         var blogId = httpContextAccessor.HttpContext!.Items["BlogId"] as Guid?;
 
+        var userId = util.GetUserId();
+
         var post = await dbContext.Post
+        .Include(t => t.Blog)
         .Where(t => t.BlogId == blogId
-        && t.Status == PostStatusDto.Public)
-        .Select(t => new PostDto(
+        && t.Blog!.UserId == userId)
+        .Select(t => new PostDtoOwner(
             Id: t.Id,
             Title: t.Title,
+            Status: t.Status,
             CreatedAt: t.CreatedAt ?? DateTime.MinValue,
             Content: t.Content
         ))
         .ToListAsync(ct);
 
-        var response = new Result (
+        var response = new ResultOwner (
             Data: post
         );
 

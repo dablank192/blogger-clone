@@ -17,8 +17,11 @@ public class PostConfig : IEntityTypeConfiguration<Post>
 
         builder.HasIndex(t => t.BlogId);
 
+        builder.Property(t => t.CreatedAt)
+        .IsRequired(false);
+
         builder.HasOne(t => t.Blog)
         .WithMany(t => t.Post)
-        .OnDelete(DeleteBehavior.Restrict);
+        .OnDelete(DeleteBehavior.Cascade);
     }
 }

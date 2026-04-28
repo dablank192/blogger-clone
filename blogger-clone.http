@@ -1,5 +1,5 @@
 @blogger_clone_HostAddress = http://localhost:5002
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI2NmExMDllMy1mYmZlLTQ4MGYtYjgzMC03ODQwZTU0Nzg4MDYiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc3NzM4NDg3MCwiaXNzIjoiYmxvZ2dpbmctYXBwIiwiYXVkIjoiVXNlciJ9.3kYiS-SwEmtZbxhw2SIgGJ-8coYbNEP0YsKmlWZ0rIc
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI2NmExMDllMy1mYmZlLTQ4MGYtYjgzMC03ODQwZTU0Nzg4MDYiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc3NzQwNjExOX0.c2p2smXEjXYVdKgqOGOCmhMZK73rK2hrB4mQakDj9yE
 
 GET {{blogger_clone_HostAddress}}/weatherforecast/
 Accept: application/json
@@ -56,7 +56,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "title": "test2",
+    "title": "test4",
     "content": "test123"
 }
 
@@ -64,6 +64,20 @@ Content-Type: application/json
 
 GET http://user00221980.lvh.me:5002/api/v1/post/all-post
 
+###Get all Post (Owner)
+
+GET http://user00349014.lvh.me:5002/api/v1/owner/post/all-post
+Authorization: Bearer {{token}}
+
 ### Delete Post
 DELETE  {{blogger_clone_HostAddress}}/api/v1/post/4dbeba53-bad8-46f3-afaf-ee1b30f6b36d
+Authorization: Bearer {{token}}
+
+### Get All User (Admin)
+GET {{blogger_clone_HostAddress}}/api/v1/admin/user
+Authorization: Bearer {{token}}
+
+### Delete a User (Admin)
+
+DELETE {{blogger_clone_HostAddress}}/api/v1/admin/user/1987d317-9dd8-407f-a4b7-fbfe4e07996c
 Authorization: Bearer {{token}}

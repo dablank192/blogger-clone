@@ -41,6 +41,9 @@
     <Folder Include="Feature\Post\CreatePost\" />
     <Folder Include="Feature\Post\DeletePost\" />
     <Folder Include="Feature\Post\GetPost\" />
+    <Folder Include="Feature\UserManage\" />
+    <Folder Include="Feature\UserManage\DeleteUser\" />
+    <Folder Include="Feature\UserManage\GetAllUser\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using blogger_clone.Exception.Auth;
 using FluentValidation;
 using blogger_clone.Model;
 using blogger_clone.Exception.Blog;
+using blogger_clone.Exception.Post;
 
 
 namespace blogger_clone.Infrastructure;
@@ -67,6 +68,22 @@ public class GlobalExceptionHandler : IExceptionHandler
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             problemDetail.Title = "Blog not existed";
+            problemDetail.Detail = exception.Message;
+            problemDetail.Status = StatusCodes.Status404NotFound;
+        }
+
+        else if (exception is PostNotExistedException)
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            problemDetail.Title = "Post not existed";
+            problemDetail.Detail = exception.Message;
+            problemDetail.Status = StatusCodes.Status404NotFound;
+        }
+
+        else if (exception is UserNotFoundException)
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            problemDetail.Title = "User not existed";
             problemDetail.Detail = exception.Message;
             problemDetail.Status = StatusCodes.Status404NotFound;
         }
