@@ -1,5 +1,5 @@
 @blogger_clone_HostAddress = http://localhost:5002
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI2NmExMDllMy1mYmZlLTQ4MGYtYjgzMC03ODQwZTU0Nzg4MDYiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc3NzI5OTQyNywiaXNzIjoiYmxvZ2dpbmctYXBwIiwiYXVkIjoiVXNlciJ9.U3tGziL8vGooNAbOybfVuSfjFAB3iydQST3Yd_Xz3Ec
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI2NmExMDllMy1mYmZlLTQ4MGYtYjgzMC03ODQwZTU0Nzg4MDYiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc3NzM2MTU5MywiaXNzIjoiYmxvZ2dpbmctYXBwIiwiYXVkIjoiVXNlciJ9.OFLmoPqIemVhLTjmR_2LkLj6qfovfLnlU7XzID22wx8
 
 GET {{blogger_clone_HostAddress}}/weatherforecast/
 Accept: application/json
@@ -48,3 +48,21 @@ Authorization: Bearer {{token}}
 
 GET {{blogger_clone_HostAddress}}/api/v1/admin/blog/
 Authorization: Bearer {{token}}
+
+### Create Post 
+
+POST {{blogger_clone_HostAddress}}/api/v1/post/new-post
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "title": "test",
+    "content": "test123"
+}
+
+### Get all Post
+
+GET http://user00221980.lvh.me:5002/api/v1/post/all-post
+
+###
+GET {{blogger_clone_HostAddress}}/api/v1/post/all-post

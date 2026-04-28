@@ -29,6 +29,7 @@
     <Folder Include="Exception\" />
     <Folder Include="Exception\Auth\" />
     <Folder Include="Exception\Blog\" />
+    <Folder Include="Exception\Post\" />
     <Folder Include="Extension\" />
     <Folder Include="Feature\Auth\" />
     <Folder Include="Feature\Auth\UserLogin\" />
@@ -36,6 +37,9 @@
     <Folder Include="Feature\Blog\Admin\" />
     <Folder Include="Feature\Blog\Admin\DeleteBlogAdmin\" />
     <Folder Include="Feature\Blog\Admin\GetBlogAdmin\" />
+    <Folder Include="Feature\Post\" />
+    <Folder Include="Feature\Post\CreatePost\" />
+    <Folder Include="Feature\Post\GetPost\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />
   </ItemGroup>

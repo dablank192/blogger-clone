@@ -9,7 +9,7 @@ public class TenantResolutionMiddleware(
 )
 
 {
-    public async Task InvokeAsync(AppDbContext dbContext, HttpContext httpContext)
+    public async Task InvokeAsync(HttpContext httpContext, AppDbContext dbContext)
     {
         var host = httpContext.Request.Host.Value!.ToLower();
 
@@ -23,7 +23,7 @@ public class TenantResolutionMiddleware(
             && host != baseDomain
         )
         {
-            subDomain = host.Replace($"{baseDomain}", "");
+            subDomain = host.Replace($".{baseDomain}", "");
         }
 
         if(!string.IsNullOrEmpty(subDomain))

@@ -11,7 +11,7 @@ public class BlogApi : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/v1/blog")
-        .WithTags("Blog");
+        .WithTags("Blog Management");
 
         var groupAdmin = app.MapGroup("api/v1/admin/blog")
         .RequireAuthorization(p => p.RequireRole("Admin"))
