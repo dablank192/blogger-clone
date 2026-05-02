@@ -3,8 +3,12 @@ using blogger_clone.Exception.Auth;
 using blogger_clone.Extension;
 using blogger_clone.Infrastructure;
 using blogger_clone.Model;
+using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace blogger_clone.Feature.Auth.UserRegister;
 
@@ -51,14 +55,36 @@ public class UserRegister : IRequestHandler<Command, Result>
 
     public static void MapEndpoint (RouteGroupBuilder group)
     {
-        group.MapPost("/register", async (
-            Command req,
-            ISender sender
-        ) => {
-            var result = await sender.Send(req);
+        group.MapGet("/register", async()
+        =>
+        {
+            return new RazorComponentResult<RegisterPageView>();
+        });
 
-            return Results.Ok(result);
-        })
+
+        group.MapPost("/register", async Task<IResult>(
+            [FromForm]Command req,
+            [FromServices]ISender sender
+        ) => {
+                try
+                {
+                    await sender.Send(req);
+
+                    return new RazorComponentResult<RegisterSuccessView>();
+                }
+                catch(ValidationException ex)
+                {
+                    var error = ex.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary(g => g.Key, g => g.First().ErrorMessage);
+
+                    return new RazorComponentResult<RegisterPageView>(new
+                    {
+                        errors= error,
+                        submittedEmail= req.Email
+                    });
+                }
+            })
         .WithName("User Register")
         .Produces<Result>(StatusCodes.Status200OK)
         .ProducesValidationProblem();

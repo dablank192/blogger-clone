@@ -37,7 +37,11 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUtils, Utils>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(option => 
+{
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
 .AddJwtBearer(option =>
 {
     option.TokenValidationParameters = new TokenValidationParameters
@@ -52,12 +56,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
         ClockSkew= TimeSpan.Zero
     };
+    option.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            if(context.Request.Cookies.ContainsKey("AccessKey"))
+            {
+                context.Token = context.Request.Cookies["AccessKey"];
+            }
+            return Task.CompletedTask;
+        }
+    };
 });
 
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
 
 builder.Services.AddRazorComponents();
+
+builder.Services.AddAntiforgery();
 
 
 
@@ -68,6 +84,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseAntiforgery();
 
 app.UseStaticFiles();
 

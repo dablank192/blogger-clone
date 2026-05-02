@@ -3,6 +3,7 @@ using System.Security.Authentication;
 using blogger_clone.Extension;
 using blogger_clone.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace blogger_clone.Feature.Auth.UserLogin;
@@ -45,12 +46,30 @@ public class UserLogin : IRequestHandler<Command, Result>
 
     public static void MapEndpoint (RouteGroupBuilder group)
     {
+        group.MapGet("/login", async()
+        =>
+        {
+            return new RazorComponentResult<LoginPageView>();
+        });
+
+
         group.MapPost("/login", async(
             Command req,
-            ISender sender
+            ISender sender,
+            HttpContext httpContext
         ) =>
         {
             var result = await sender.Send(req);
+
+            httpContext.Response.Cookies.Append("AccessKey", result.Token, new CookieOptions
+            {
+                HttpOnly= true,
+                Secure= false,
+                SameSite= SameSiteMode.Strict,
+                Expires= DateTime.UtcNow.AddHours(1)
+            });
+
+            httpContext.Response.Headers.Append("HX-Redirect", "/api/v1/home");
 
             return Results.Ok(result);
         })

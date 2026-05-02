@@ -4,7 +4,7 @@ using MediatR;
 
 namespace blogger_clone.Feature.Auth.UserLogin;
 
-public record Command (
+public record Command(
     string UsernameOrEmail,
     string Password
 ) : IRequest<Result>;
