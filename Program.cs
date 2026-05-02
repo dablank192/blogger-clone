@@ -57,6 +57,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication();
 
+builder.Services.AddRazorComponents();
 
 
 
@@ -67,6 +68,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,0 +1,29 @@
+
+        /* Tối giản CSS, chỉ giữ lại các thiết lập về Font và Màu sắc đặc thù */
+        body {
+            font-family: 'Nimbus Sans', Arial, sans-serif; /* Mặc định cho toàn trang */
+            background-color: #ffffff;
+            color: #0b1c30;
+        }
+        
+        .font-work-sans { font-family: 'Work Sans', sans-serif; }
+        .font-newsreader { font-family: 'Newsreader', serif; }
+        .text-gray { color: #45464d; }
+        
+        /* Chỉnh nút bấm giống bản thiết kế gốc (Vuông vức, border-radius nhỏ) */
+        .btn-black {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 2px;
+            padding: 8px 24px;
+        }
+        .btn-black:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        
+        /* Chỉnh footer đồng màu thiết kế */
+        .bg-footer {
+            background-color: #fcfcfc; 
+            border-top: 1px solid #eaeaea;
+        }
